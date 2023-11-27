@@ -12,8 +12,7 @@ import Modal from 'react-native-modal';
 import {useDispatch, useSelector} from 'react-redux';
 import * as yup from 'yup';
 import {ValidationError} from 'yup';
-import { useFocusEffect } from '@react-navigation/native';
-
+import styles from './styles';
 interface BottomPopupProps {
   isVisible: boolean;
   onClose: () => void;
@@ -71,17 +70,17 @@ const BottomPopup: React.FC<BottomPopupProps> = ({
   };
   useEffect(() => {
     if (refresh && data?.createdMovieList?.isSuccess) {
-    
-     console.log(refresh, data?.createdMovieList?.isSuccess,"kklklklklklklk:::::::::::::::::::::::::::::::::::::::::::::::::::::" );
-     setRefresh(false);
-     setShowSuccessModal(true);
-
+      console.log(
+        refresh,
+        data?.createdMovieList?.isSuccess,
+        'kklklklklklklk:::::::::::::::::::::::::::::::::::::::::::::::::::::',
+      );
+      setRefresh(false);
+      setShowSuccessModal(true);
     }
-  }, [refresh,  data?.createdMovieList?.isSuccess,setRefresh]);
+  }, [refresh, data?.createdMovieList?.isSuccess, setRefresh]);
 
-
-  console.log( data?.createdMovieList);
-
+  console.log(data?.createdMovieList);
 
   return (
     <Modal
@@ -131,128 +130,36 @@ const BottomPopup: React.FC<BottomPopupProps> = ({
 
             <TouchableOpacity style={styles.button} onPress={call}>
               {data?.createdMovieList?.isLoading ? (
-                <ActivityIndicator
-                  color="#fff"
-                  style={{flex: 1,}}
-                />
+                <ActivityIndicator color="#fff" style={{flex: 1}} />
               ) : (
                 <Text style={{color: '#ffffff'}}>CREATE</Text>
               )}
             </TouchableOpacity>
           </View>
         </View>
-        <Modal isVisible={showSuccessModal} animationIn="slideInUp" animationOut="slideOutDown">
+        <Modal
+          isVisible={showSuccessModal}
+          animationIn="slideInUp"
+          animationOut="slideOutDown">
           <View style={styles.successModal}>
-            <Text style={styles.successText}>List id: {data?.createdMovieList?.data?.list_id}</Text>
+            <Text style={styles.successText}>
+              List id: {data?.createdMovieList?.data?.list_id}
+            </Text>
             <Text style={styles.successText}>Movie added Successfully!</Text>
-            <TouchableOpacity onPress={() => {setShowSuccessModal(false); onClose()}}>
+            <TouchableOpacity
+              onPress={() => {
+                setShowSuccessModal(false);
+                onClose();
+              }}>
               <Text style={styles.closeSuccessModal}>Close</Text>
             </TouchableOpacity>
           </View>
         </Modal>
       </View>
-      
     </Modal>
   );
 };
 
-const styles = StyleSheet.create({
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    maxHeight: '90%',
-  },
-  scrollContainer: {
-    padding: 20,
-    paddingBottom: 60,
-  },
-  handleBar: {
-    height: 5,
-    width: 50,
-    backgroundColor: 'lightgray',
-    alignSelf: 'center',
-    marginVertical: 10,
-    borderRadius: 5,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
 
-  closeButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
-  },
-  header: {
-    padding: 16,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    gap: 100,
-  },
-  headerText: {
-    fontSize: 19,
-    color: '#2f2f2f',
-    fontWeight: '700',
-  },
-  AddText: {
-    color: '#1554f6',
-    fontFamily: '600',
-    fontSize: 18,
-  },
-  separator: {
-    borderBottomColor: '#dee1e4',
-    borderBottomWidth: 1,
-  },
-  containerInput: {
-    width: '100%',
-    marginTop: 20,
-    paddingHorizontal: 20,
-  },
-  input: {
-    height: 50,
-    backgroundColor: '#f3f3f3',
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#1554f6',
-    padding: 10,
-  },
-  error: {
-    color: 'red',
-    marginBottom: 8,
-  },
-  successModal: {
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-  },
-
-  successText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-
-  closeSuccessModal: {
-    color: '#1554f6',
-    fontSize: 16,
-  },
-});
 
 export default BottomPopup;

@@ -1,0 +1,18 @@
+
+export const color = {
+  WHITE: '#FFFFFF',
+  BLACK: '#000000',
+  DARK_BLUE: '#0C314E',
+  LIGHT_BLUE: '#9ECCF0',
+  MIDNIGHT_BLUE: '#03253F',
+  PASTEL_BLUE: '#D1EBFF',
+  ELECTRIC_GREEN: '#81FFC2',
+  RED: 'red',
+  CYAN_BLUE: '#dee1e4',
+  GRAY:'#808080',
+  TRICORN_BLACK:'#2f2f2f',
+  LIGHT_SHŌJIN_BLUE:'#1554f6',
+  BLEACHED_SILK:'#f3f3f3',
+  LIGHT_GREY: '#D3D3D3'
+};
+

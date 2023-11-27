@@ -54,7 +54,7 @@ export function* createnewMovieRequest(action:any) {
     );
 
     yield put(actions.createnewMovieSuccess(response.data));
-    yield put(actions.getListRequest());
+    yield put(actions.getListRequest(1));
   } catch (error: any) {
     yield put(actions.createnewMovieError(error.message));
   }
