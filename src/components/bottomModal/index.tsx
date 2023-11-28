@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as yup from 'yup';
 import {ValidationError} from 'yup';
 import styles from './styles';
+import { color } from '../../utils';
 interface BottomPopupProps {
   isVisible: boolean;
   onClose: () => void;
@@ -54,7 +55,6 @@ const BottomPopup: React.FC<BottomPopupProps> = ({
       setRefresh(true);
       setName('');
       setDescription('');
-      //setShowSuccessModal(true);
     } catch (validationError) {
       if (validationError instanceof ValidationError) {
         validationError.inner.forEach(error => {
@@ -75,8 +75,6 @@ const BottomPopup: React.FC<BottomPopupProps> = ({
     }
   }, [refresh, data?.createdMovieList?.isSuccess, setRefresh]);
 
-  console.log(data?.createdMovieList,";;;;");
-
   return (
     <Modal
       isVisible={isVisible}
@@ -95,7 +93,7 @@ const BottomPopup: React.FC<BottomPopupProps> = ({
             <TouchableOpacity onPress={onClose}>
               <Text style={styles.AddText}>Cancel</Text>
             </TouchableOpacity>
-            <Text style={styles.headerText}>Create list</Text>
+            <Text testID='some-element' style={styles.headerText}>Create list</Text>
           </View>
           <Separator />
           <View style={styles.containerInput}>
@@ -126,9 +124,9 @@ const BottomPopup: React.FC<BottomPopupProps> = ({
 
             <TouchableOpacity style={styles.button} onPress={call}>
               {data?.createdMovieList?.isLoading ? (
-                <ActivityIndicator color="#fff" style={{flex: 1}} />
+                <ActivityIndicator color={color.WHITE} style={{flex: 1}} />
               ) : (
-                <Text style={{color: '#ffffff'}}>CREATE</Text>
+                <Text style={{color: color.WHITE}}>CREATE</Text>
               )}
             </TouchableOpacity>
           </View>

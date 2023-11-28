@@ -1,5 +1,6 @@
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
+import {color} from '../../utils';
 interface MyProps {
   page: number;
   handleLoadMore: any;
@@ -8,7 +9,7 @@ export const Pagination: React.FC<MyProps> = ({page, handleLoadMore}) => {
   const data = useSelector((state: any) => state.Lists);
 
   return (
-    <View style={styles.paginayionContainer}>
+    <View style={styles.paginayionContainer} testID="pagination-next">
       <TouchableOpacity
         style={styles.button}
         disabled={page === 1 ? true : false}
@@ -31,10 +32,14 @@ export const Pagination: React.FC<MyProps> = ({page, handleLoadMore}) => {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#fffff',
+    backgroundColor: color.WHITE,
     padding: 10,
   },
-  viewDeleteButton: {color: '#1554f6', fontSize: 18, fontWeight: '500'},
+  viewDeleteButton: {
+    color: color.LIGHT_SHŌJIN_BLUE,
+    fontSize: 18,
+    fontWeight: '500',
+  },
   nextPreviousButton: {
     fontSize: 17,
     fontWeight: '600',

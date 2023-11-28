@@ -59,6 +59,7 @@ const MyList: React.FC = ({}) => {
               <ActivityIndicator
                 size={'large'}
                 style={styles.activityIndicator}
+                testID='activity-indicator'
               />
             </View>
           ) : movieList?.totalMovieList?.isSuccess ? (
@@ -73,7 +74,7 @@ const MyList: React.FC = ({}) => {
               contentContainerStyle={styles.flatListContainer}
             />
           ) : (
-            <View style={styles.errorContainer}>
+            <View style={styles.errorContainer} testID='error-container'>
               <Text style={styles.error}>Something went Wrong!</Text>
             </View>
           )}
