@@ -14,14 +14,14 @@ import {getListRequest, createnewMovieRequest} from '../redux/actions';
 import {Pagination} from '../components/pagination';
 import {Moviecards} from '../components/cards';
 import styles from './styles';
-interface MyListProps {
-  name: string;
-}
 
-const MyList: React.FC<MyListProps> = ({}) => {
+
+const MyList: React.FC = ({}) => {
   const dispatch = useDispatch();
   const [isPopupVisible, setPopupVisibility] = useState(false);
   const [page, setPage] = useState(1);
+
+  const movieList = useSelector((state: any) => state.Lists);
 
   useEffect(() => {
     dispatch(getListRequest(page));
@@ -36,8 +36,7 @@ const MyList: React.FC<MyListProps> = ({}) => {
     dispatch(getListRequest(num));
   };
 
-  const data = useSelector((state: any) => state.Lists);
-
+  // console.log(movieList?.totalMovieList?.data,"movieList?.totalMovieList?.data?.results")
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -55,18 +54,19 @@ const MyList: React.FC<MyListProps> = ({}) => {
               />
             </View>
           </View>
-          {data?.totalMovieList?.isLoading ? (
+          {movieList?.totalMovieList?.isLoading ? (
             <View style={styles.activityIndicatorContainer}>
               <ActivityIndicator
                 size={'large'}
                 style={styles.activityIndicator}
               />
             </View>
-          ) : data?.totalMovieList?.isSuccess ? (
+          ) : movieList?.totalMovieList?.isSuccess ? (
             <FlatList
+            testID='flat-list'
               data={
-                data?.totalMovieList?.data?.results &&
-                data?.totalMovieList?.data?.results
+                movieList?.totalMovieList?.data?.results &&
+                movieList?.totalMovieList?.data?.results
               }
               renderItem={Moviecards}
               keyExtractor={item => item.id.toString()}
@@ -77,9 +77,7 @@ const MyList: React.FC<MyListProps> = ({}) => {
               <Text style={styles.error}>Something went Wrong!</Text>
             </View>
           )}
-          {data?.totalMovieList?.data && (
             <Pagination page={page} handleLoadMore={handleLoadMore} />
-          )}
         </View>
       </ScrollView>
     </SafeAreaView>

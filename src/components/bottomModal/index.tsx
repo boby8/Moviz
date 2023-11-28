@@ -70,21 +70,17 @@ const BottomPopup: React.FC<BottomPopupProps> = ({
   };
   useEffect(() => {
     if (refresh && data?.createdMovieList?.isSuccess) {
-      console.log(
-        refresh,
-        data?.createdMovieList?.isSuccess,
-        'kklklklklklklk:::::::::::::::::::::::::::::::::::::::::::::::::::::',
-      );
       setRefresh(false);
       setShowSuccessModal(true);
     }
   }, [refresh, data?.createdMovieList?.isSuccess, setRefresh]);
 
-  console.log(data?.createdMovieList);
+  console.log(data?.createdMovieList,";;;;");
 
   return (
     <Modal
       isVisible={isVisible}
+      testID='bottom-popup'
       animationIn="slideInUp"
       animationOut="slideOutDown"
       style={styles.modal}>
